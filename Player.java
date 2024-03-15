@@ -1,58 +1,56 @@
 package player;
 
+import java.util.Scanner;
+
 public class Player {
-    private String name;
-    private char symbol;
-    private String address;
-    private long contactNumber;
-    private String email;
-    private int age;
+    String name;
+    String contactno;
+    String email;
+    String address;
+    int age;
 
-    public void setPlayerdetails(String name,char symbol,String address ,long contactNumber,String email,int age){
+    public void setplayerdetails(String name,String contactno,String email,String address, int age ){
+
         this.name=name;
-        this.symbol=symbol;
+        this.contactno=contactno;
+        this.email=email;
         this.address=address;
-        this.contactNumber=contactNumber;
-        this.email=email;
-        this.age=age;
-
-    }
-    public void setPlayernameandage(String name,int age){
-        this.name=name;
         this.age=age;
     }
 
-    public void setPlayerNameSymEmailAge(String name,char symbol,String email,int age){
-        this.name=name;
-        this.age=age;
-        this.symbol=symbol;
-        this.email=email;
-
-    }
-    public void setPlayerNamesym(String name,char symbol){
-        this.name=name;
-        this.symbol=symbol;
-
-    }
-    public String getPlayername (){
-        return name;
-
-    }
-    public char getPlayersym(){
-        return symbol;
-    }
-    public  void getPlayernamesym(){
-        System.out.println("player name: "+this.name);
-        System.out.println("player sym: "+this.symbol);
+    public void setPlayername(String name){
+         this.name=name; 
     }
     public void getPlayerdetails(){
-        System.out.println("player name: "+this.name);
-        System.out.println("player symbol: "+this.symbol);;
-        System.out.println("player address: "+this.address);
-        System.out.println("player contact number: "+this.contactNumber);
-        System.out.println("player emailId: "+this.email);
-        System.out.println("player age: "+this.age);
+        System.out.println("player name :"+this.name);
+        System.out.println("player contact no :"+this.contactno);
+        System.out.println("player email id :"+this.email);
+        System.out.println("player  address :"+this.address);
+        System.out.println("player age :"+this.age);
     }
+    public String getPlayername(){
+        return this.name;
+    }
+
+    public  void setPlayerdetailsfromuserinput(Player p){
+        Scanner s=new Scanner (System.in);
+        System.out.println("ENTER PLAYER DETAILS->");
+        System.out.println("enter player name:");
+        String name=s.nextLine();
+        System.out.println("enter player contactno:");
+        String contactno=s.nextLine();
+        System.out.println("enter player email:");
+        String email=s.nextLine();
+        System.out.println("enter player address:");
+        String address=s.nextLine();
+        System.out.println("enter player age:");
+        int age=s.nextInt();
+        
+        p.setplayerdetails(name,contactno,email,address,age);
+        
+
+
+    } 
 
 
 }
