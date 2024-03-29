@@ -1,51 +1,59 @@
-import player.Player;
-import dice.Dice;
-import game.Game;
-import jumper.Jumper;
-import coordinates.Coordinates;
-import java.util.HashMap;
-import board.Board;
+// import coin.Coin;
+import item.*;
+import vendingmachine.*;
+
 
 public class App {
     public static void main(String[] args) throws Exception {
-
-         HashMap<String,Jumper> map= new HashMap<>();
-         map.put("9",new Jumper(new Coordinates(9, 0),new Coordinates(8, 5)));
-         map.put("4",new Jumper(new Coordinates(8, 1),new Coordinates(0, 3)));
-         map.put("79",new Jumper(new Coordinates(7, 5),new Coordinates(3, 2)));
-         map.put("34",new Jumper(new Coordinates(2, 9),new Coordinates(8, 6)));
-         map.put("50",new Jumper(new Coordinates(1, 6),new Coordinates(9, 4)));
-         map.put("90",new Jumper(new Coordinates(4, 0),new Coordinates(7, 7)));
-
-        Player p1=new Player();
-        p1.setPlayerdetailsfromuserinput(p1);
-        p1.getPlayerdetails(); 
-
-        Player p2=new Player();
-        p2.setPlayerdetailsfromuserinput(p2);
-        p2.getPlayerdetails();
-
-        // Dice dice=new Dice();
-        // System.out.println(dice.diceRoll());
-
-        // Coordinates c=new Coordinates(9,4);
-        // Coordinates d=new Coordinates(0,4);
-        // System.out.println(c.printCordinates());
-        // Jumper j=new Jumper (c,d);
-        // System.out.println(j.getJumpername());
-
-        Board b=new Board(10,map);
-        b.printBoard();
-
-        Game game = new Game(b, new Player[] {p1,p2}, new Dice());
-        game.play();
-
-
-
-
-
-        
-        
+        // int value=Coin.fifty.getValue();
+        // System.out.println(value);
+        VendingMachine vendingMachine=new VendingMachine();
+        System.out.println("fill the inventory");
+        fillInventory(vendingMachine);
+        displayInventory(vendingMachine);
     }
-    
+    private static void fillInventory(VendingMachine vendingMachine){
+        Itemshelf[] itemShelfSlots = vendingMachine.getInventory().getInventory();
+        for(int i=0;i<itemShelfSlots.length;i++) {
+            Item item = new Item();
+            if (i == 0 || i == 8) {
+                item.setItemtype(ItemType.oreo);
+                item.setPrice(30);
+            } else if (i == 1 || i == 9) {
+                item.setItemtype(ItemType.juice);
+                item.setPrice(40);
+            } else if (i == 2) {
+                item.setItemtype(ItemType.coke);
+                item.setPrice(45); 
+            } else if (i == 3) {
+                item.setItemtype(ItemType.soda);
+                item.setPrice(20); 
+            } else if (i == 4) {
+                item.setItemtype(ItemType.chips);
+                item.setPrice(20); 
+            } else if (i == 5) {
+                item.setItemtype(ItemType.chocolate);
+                item.setPrice(60); 
+            } else if (i == 6) {
+                item.setItemtype(ItemType.candy);
+                item.setPrice(5); 
+            } else if (i == 7) {
+                item.setItemtype(ItemType.gum);
+                item.setPrice(5); 
+            }
+            itemShelfSlots[i].setItem(item);
+            itemShelfSlots[i].setsoldout(false);
+        }
+
+
+    }
+    private static void displayInventory(VendingMachine vendingMachine){
+        Itemshelf[] itemShelfSlots = vendingMachine.getInventory().getInventory();
+        System.out.println(itemShelfSlots.length);
+        for(Itemshelf shelf: itemShelfSlots) {
+            System.out.println("Item Code: " + shelf.getItemcode() + " Item: " + shelf.getItem().getType() +" Price: " + shelf.getItem().getPrice() + 
+            " isAvailable:" + !shelf.isSoldout());
+        }
+    }
 }
+            
